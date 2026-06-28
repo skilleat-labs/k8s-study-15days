@@ -1,0 +1,77 @@
+site_name: 쿠버네티스 15일 실습 가이드
+site_description: Rancher Desktop 기반 컨테이너·쿠버네티스 핸즈온 실습
+site_author: skilleat-labs
+# GitHub Pages 주소 (저장소명 기준). 사용자/조직 페이지면 수정하세요.
+site_url: https://skilleat-labs.github.io/k8s-study-15days/
+repo_url: https://github.com/skilleat-labs/k8s-study-15days
+repo_name: skilleat-labs/k8s-study-15days
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로 전환
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.emoji
+
+nav:
+  - 홈: index.md
+  - 환경 준비:
+      - Rancher Desktop 설치·설정: setup/rancher-desktop.md
+  - 실습:
+      - "Lab 1 · 컨테이너 & 이미지 기초": labs/lab1-container-basics.md
+      - "Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)": labs/lab2-kubernetes-start.md
+      - "Lab 3 · 워크로드와 서비스 노출": labs/lab3-workloads-service.md
+      - "Lab 4 · 운영 기반과 자동화": labs/lab4-operations.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/skilleat-labs/k8s-study-15days
