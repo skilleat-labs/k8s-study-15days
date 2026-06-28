@@ -69,9 +69,6 @@ nav:
       - "Day 1 · 쿠버네티스 구조 완전 정복": lectures/day1.md
   - 실습:
       - "Lab 1 · 컨테이너 & 이미지 기초": labs/lab1-container-basics.md
-      - "Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)": labs/lab2-kubernetes-start.md
-      - "Lab 3 · 워크로드와 서비스 노출": labs/lab3-workloads-service.md
-      - "Lab 4 · 운영 기반과 자동화": labs/lab4-operations.md
 
 extra:
   social:
