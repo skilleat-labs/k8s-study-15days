@@ -18,8 +18,6 @@
         <link rel="prev" href="../../lectures/day1/">
       
       
-        <link rel="next" href="../lab2-kubernetes-start/">
-      
       
         
       
@@ -764,7 +762,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        도전과제 🔥
+        정리(실습 청소)
       
     </span>
   </a>
@@ -773,6 +771,17 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도전과제 🔥
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         정리 &amp; 다음 단계
@@ -786,90 +795,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lab2-kubernetes-start/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lab3-workloads-service/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 3 · 워크로드와 서비스 노출
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lab4-operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 4 · 운영 기반과 자동화
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1001,7 +926,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        도전과제 🔥
+        정리(실습 청소)
       
     </span>
   </a>
@@ -1010,6 +935,17 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도전과제 🔥
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         정리 &amp; 다음 단계
@@ -1051,43 +987,47 @@
 <p>PPT 연계: <em>컨테이너 개념 · 이미지 · Docker 한계</em></p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">준비</p>
-<p><a href="../../setup/rancher-desktop/">Rancher Desktop 설치·설정</a>을 마쳤고, <code>nerdctl version</code> 이 정상 출력되어야 합니다.
-(dockerd 모드라면 <code>nerdctl</code> 을 <code>docker</code> 로 바꿔 실행)</p>
+<p class="admonition-title">준비 / 기준 환경</p>
+<p><a href="../../setup/rancher-desktop/">Rancher Desktop 설치·설정</a>을 마쳤고, <strong>Docker(dockerd) 모드</strong>에서 <code>docker version</code> 이 정상 출력되어야 합니다.
+명령은 <strong>Windows PowerShell</strong> 기준입니다. (<code>&amp;&amp;</code> 미사용, 파일은 편집기로 저장)</p>
 </div>
 <hr />
 <h2 id="1-1">1-1. 이미지 받아 컨테이너 실행하기<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h2>
 <p>이미지(설계도)를 받아 컨테이너(실행체)로 띄웁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1) 공식 nginx 이미지 받기</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nerdctl<span class="w"> </span>pull<span class="w"> </span>nginx:1.27
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># 1) 공식 nginx 이미지 받기</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2) 컨테이너로 실행 (백그라운드 -d, 호스트 8080 → 컨테이너 80)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>web<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx:1.27
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c"># 2) 컨테이너로 실행 (백그라운드 -d, 호스트 8080 → 컨테이너 80)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web</span> <span class="n">-p</span> <span class="n">8080</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 3) 동작 확인</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>nerdctl<span class="w"> </span>ps
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>curl<span class="w"> </span>http://localhost:8080
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c"># 3) 동작 확인</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">docker</span> <span class="nb">ps</span>
 </code></pre></div>
-<p>브라우저에서 <code>http://localhost:8080</code> 을 열어 nginx 기본 페이지가 보이면 성공입니다.</p>
+<p>브라우저에서 <strong>http://localhost:8080</strong> 을 열어 nginx 기본 페이지가 보이면 성공입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">터미널로 HTTP 확인</p>
+<p>PowerShell에서 <code>curl</code> 은 <code>Invoke-WebRequest</code> 별칭이라 동작이 다릅니다. 진짜 curl은 <code>curl.exe</code> 로 부르세요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">8080</span>
+</code></pre></div></p>
+</div>
 <div class="admonition question">
-<p class="admonition-title">확인</p>
-<p><code>nerdctl images</code> 로 받은 이미지를, <code>nerdctl ps</code> 로 실행 중인 컨테이너를 봅니다.
-<strong>하나의 이미지로 여러 컨테이너</strong>를 띄울 수 있습니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>web2<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>nginx:1.27
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>nerdctl<span class="w"> </span>ps<span class="w">   </span><span class="c1"># web, web2 두 개가 같은 이미지로 동작</span>
+<p class="admonition-title">확인 · 하나의 이미지 → 여러 컨테이너</p>
+<p>같은 이미지로 컨테이너를 하나 더 띄워봅니다.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web2</span> <span class="n">-p</span> <span class="n">8081</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">docker</span> <span class="nb">ps</span>
 </code></pre></div></p>
 </div>
 <hr />
 <h2 id="1-2">1-2. 컨테이너는 "격리된 프로세스"다<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h2>
 <p>컨테이너 안에서 보이는 세상이 호스트와 다른 것을 확인합니다. (Namespace 격리)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 컨테이너 안으로 들어가기</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>nerdctl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>web<span class="w"> </span>sh
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># (컨테이너 안에서) 자기 자신이 PID 1 임을 확인</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ps<span class="w"> </span>-ef
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>hostname
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>ip<span class="w"> </span>addr<span class="w">        </span><span class="c1"># 자기만의 IP (없으면 &#39;apk add iproute2&#39; 후 재시도)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">exit</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c"># 컨테이너 안으로 들어가기 (셸 진입)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">docker</span> <span class="n">exec</span> <span class="n">-it</span> <span class="n">web</span> <span class="n">sh</span>
+</code></pre></div>
+<p>컨테이너 안(리눅스 셸)에서 아래를 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ps<span class="w"> </span>-ef<span class="w">        </span><span class="c1"># 자기 자신이 PID 1 임을 확인</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>hostname<span class="w">      </span><span class="c1"># 자기만의 호스트명</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>ip<span class="w"> </span>addr<span class="w">       </span><span class="c1"># 자기만의 IP (명령이 없으면 &#39;apk add iproute2&#39; 후 재시도)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nb">exit</span><span class="w">          </span><span class="c1"># 컨테이너에서 빠져나오기</span>
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">방금 본 것</p>
@@ -1096,48 +1036,71 @@
 </div>
 <h3 id="pid-1">컨테이너 = 프로세스 (PID 1 수명)<a class="headerlink" href="#pid-1" title="Permanent link">&para;</a></h3>
 <p>컨테이너는 메인 프로세스가 살아있는 동안만 살아 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 할 일(echo)만 하고 즉시 끝나는 컨테이너</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>once<span class="w"> </span>ubuntu<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello Container&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 상태 확인 → Exited (메인 프로세스가 끝났으니 컨테이너도 종료)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>nerdctl<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>once
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c"># 할 일(echo)만 하고 즉시 끝나는 컨테이너</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-name</span> <span class="n">once</span> <span class="n">ubuntu</span> <span class="nb">echo </span><span class="s2">&quot;Hello Container&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c"># 전체 컨테이너 목록에서 once 의 STATUS 확인 → Exited</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">docker</span> <span class="nb">ps </span><span class="n">-a</span>
 </code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">결론</p>
-<p><code>docker run ubuntu echo "..."</code> 는 출력 후 <strong>즉시 종료</strong>됩니다.
+<p><code>docker run ubuntu echo "..."</code> 는 출력 후 <strong>즉시 종료(Exited)</strong> 됩니다.
 컨테이너는 "계속 켜진 서버"가 아니라 <strong>PID 1이 살아있는 동안만 사는 프로세스</strong>입니다.</p>
 </div>
 <hr />
 <h2 id="1-3">1-3. 내 이미지 직접 빌드하기<a class="headerlink" href="#1-3" title="Permanent link">&para;</a></h2>
 <p><code>Dockerfile</code>(설계도) → 이미지 → 컨테이너 흐름을 직접 만듭니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 작업 폴더 생성</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/lab1-app<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/lab1-app
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 간단한 앱</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>app.py<span class="w"> </span><span class="s">&lt;&lt;&#39;PY&#39;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">print(&quot;hello from my image&quot;)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s">PY</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Dockerfile 작성</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile<span class="w"> </span><span class="s">&lt;&lt;&#39;DOCKER&#39;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s">FROM python:3.12-slim</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s">WORKDIR /app</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="s">COPY app.py .</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s">CMD [&quot;python&quot;, &quot;app.py&quot;]</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s">DOCKER</span>
+<p>먼저 작업 폴더로 이동합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">mkdir</span> <span class="n">lab1-app</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd </span><span class="n">lab1-app</span>
 </code></pre></div>
-<p>이미지를 빌드합니다. <strong>쿠버네티스에서도 쓰려면</strong> containerd의 <code>k8s.io</code> 네임스페이스로 빌드합니다(Lab 2에서 사용).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># containerd 모드: k8s가 보는 네임스페이스로 빌드</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>nerdctl<span class="w"> </span>--namespace<span class="w"> </span>k8s.io<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 실행해 보기</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>nerdctl<span class="w"> </span>--namespace<span class="w"> </span>k8s.io<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>myapp:1.0
+<p>아래 두 파일을 편집기로 저장합니다. (같은 <code>lab1-app</code> 폴더 안)</p>
+<div class="highlight"><span class="filename">app.py</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello from my image&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>.
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+<details class="tip">
+<summary>터미널에서 바로 파일 만들기 (선택)</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell (Windows)</label><label for="__tabbed_1_2">bash (macOS/Linux)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="s1">&#39;print(&quot;hello from my image&quot;)&#39;</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">app</span><span class="p">.</span><span class="n">py</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="sh">@&#39;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="sh">FROM python:3.12-slim</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="sh">WORKDIR /app</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="sh">COPY app.py .</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="sh">CMD [&quot;python&quot;, &quot;app.py&quot;]</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="sh">&#39;@</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">Dockerfile</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;print(&quot;hello from my image&quot;)&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>app.py
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="s">FROM python:3.12-slim</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="s">WORKDIR /app</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="s">COPY app.py .</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s">CMD [&quot;python&quot;, &quot;app.py&quot;]</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="s">EOF</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+</details>
+<p>이미지를 빌드하고 실행합니다. (dockerd 모드라 별도 네임스페이스 불필요)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c"># 이미지 빌드</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">docker</span> <span class="n">build</span> <span class="n">-t</span> <span class="n">myapp</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span> <span class="p">.</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c"># 실행해 보기</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">myapp</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span>
 </code></pre></div>
 <p>기대 결과: <code>hello from my image</code> 출력.</p>
 <div class="admonition tip">
 <p class="admonition-title">레이어 캐시 관찰</p>
 <p><code>app.py</code> 만 바꾸고 다시 빌드하면, 위쪽 <code>FROM</code>/패키지 레이어는 <strong>CACHED</strong> 로 재사용됩니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nerdctl<span class="w"> </span>--namespace<span class="w"> </span>k8s.io<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.1<span class="w"> </span>.<span class="w">   </span><span class="c1"># 일부 레이어 CACHED</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">docker</span> <span class="n">build</span> <span class="n">-t</span> <span class="n">myapp</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">1</span> <span class="p">.</span>
 </code></pre></div>
 자주 바뀌는 <code>COPY</code> 는 Dockerfile 뒤쪽에 두면 캐시 적중률이 올라갑니다.</p>
 </div>
@@ -1145,13 +1108,15 @@
 <h2 id="1-4-docker">1-4. Docker 한 대의 한계 체험 (중요)<a class="headerlink" href="#1-4-docker" title="Permanent link">&para;</a></h2>
 <p>여기서 느끼는 불편함이 <strong>쿠버네티스가 필요한 이유</strong>입니다.</p>
 <h3 id="_1">자동 복구가 없다<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># web 컨테이너를 강제 종료</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>nerdctl<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>web
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>nerdctl<span class="w"> </span>ps<span class="w">          </span><span class="c1"># web 이 사라짐 — 아무도 다시 살려주지 않는다</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c"># web 컨테이너를 강제 종료</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">docker</span> <span class="nb">kill </span><span class="n">web</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c"># 목록 확인 — web 이 사라짐. 아무도 다시 살려주지 않는다</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="n">docker</span> <span class="nb">ps</span>
 </code></pre></div>
 <h3 id="_2">수동 확장 / 포트 충돌<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 같은 80포트로 또 띄우려 하면 포트 충돌</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>web3<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx:1.27<span class="w">   </span><span class="c1"># 8080 이미 사용 중 → 실패</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c"># 같은 8080 포트로 또 띄우려 하면 포트 충돌로 실패</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web3</span> <span class="n">-p</span> <span class="n">8080</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
 </code></pre></div>
 <p>복제본을 늘리려면 포트를 일일이 다르게 잡고, 그 앞에 로드밸런서도 직접 세워야 합니다.</p>
 <div class="admonition danger">
@@ -1166,16 +1131,20 @@
 <p>→ 이 다섯 가지를 자동으로 해주는 것이 <strong>오케스트레이션(쿠버네티스)</strong> 입니다. (Lab 2)</p>
 </div>
 <hr />
-<h2 id="_3">도전과제 🔥<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">정리(실습 청소)<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">docker</span> <span class="nb">rm </span><span class="o">-f</span> <span class="n">web</span> <span class="n">web2</span> <span class="n">web3</span> <span class="n">once</span>
+</code></pre></div>
+<hr />
+<h2 id="_4">도전과제 🔥<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>도전 1 (★☆☆) · 한 이미지, 두 컨테이너</summary>
 <p><code>nginx:1.27</code> 하나로 컨테이너 3개를 서로 다른 포트(8080/8081/8082)로 띄우고
-<code>nerdctl ps</code> 로 확인하세요. "하나의 이미지 → 여러 컨테이너"를 체감합니다.</p>
+<code>docker ps</code> 로 확인하세요. "하나의 이미지 → 여러 컨테이너"를 체감합니다.</p>
 <details class="note">
 <summary>힌트</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>w1<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx:1.27
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>w2<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>nginx:1.27
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>w3<span class="w"> </span>-p<span class="w"> </span><span class="m">8082</span>:80<span class="w"> </span>nginx:1.27
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">w1</span> <span class="n">-p</span> <span class="n">8080</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">w2</span> <span class="n">-p</span> <span class="n">8081</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">w3</span> <span class="n">-p</span> <span class="n">8082</span><span class="p">:</span><span class="n">80</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27</span>
 </code></pre></div>
 </details>
 </details>
@@ -1185,12 +1154,12 @@
 Dockerfile을 재구성하고, 두 번째 빌드에서 의존성 레이어가 <strong>CACHED</strong> 되는지 확인하세요.</p>
 <details class="note">
 <summary>힌트</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
 </code></pre></div>
 </details>
 </details>
@@ -1200,7 +1169,7 @@ Dockerfile을 재구성하고, 두 번째 빌드에서 의존성 레이어가 <s
 예) <em>컨테이너가 죽음 → '항상 N개가 떠 있도록 자동 유지'</em>. 이 요구사항이 Lab 2의 어떤 오브젝트로 충족될지 예상해 보세요.</p>
 </details>
 <hr />
-<h2 id="_4">정리 &amp; 다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">정리 &amp; 다음 단계<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li>컨테이너 = <strong>이미지로 패키징된 격리 프로세스</strong>, PID 1이 살아있는 동안만 동작</li>
 <li>이미지는 <strong>레이어</strong>로 빌드·캐시되며, 한 이미지로 여러 컨테이너 실행</li>
@@ -1257,22 +1226,6 @@ Dockerfile을 재구성하고, 두 번째 빌드에서 의존성 레이어가 <s
             </div>
           </a>
         
-        
-          
-          <a href="../lab2-kubernetes-start/" class="md-footer__link md-footer__link--next" aria-label="다음: Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                다음
-              </span>
-              <div class="md-ellipsis">
-                Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     

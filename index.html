@@ -695,90 +695,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="labs/lab2-kubernetes-start/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="labs/lab3-workloads-service/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 3 · 워크로드와 서비스 노출
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="labs/lab4-operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 4 · 운영 기반과 자동화
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -903,10 +819,11 @@
 <li>각 Lab 끝의 <strong>도전과제</strong>는 배운 내용을 응용합니다. 막히면 힌트를 펼쳐 보세요.</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">표기 약속</p>
+<p class="admonition-title">표기 약속 (기준 환경)</p>
 <ul>
-<li>명령은 모두 <strong>터미널(셸)</strong> 에서 실행합니다. 코드 블록 우측 상단의 복사 버튼을 쓰세요.</li>
-<li><code>nerdctl</code> 은 Rancher Desktop의 기본 컨테이너 CLI입니다. <strong>dockerd 모드</strong>를 쓴다면 <code>nerdctl</code> 을 <code>docker</code> 로 바꿔 읽으면 됩니다.</li>
+<li><strong>컨테이너 엔진: Docker(dockerd) 모드</strong> → CLI는 <code>docker</code> 를 사용합니다. (containerd 모드라면 <code>docker</code> 를 <code>nerdctl</code> 로 바꿔 읽으세요)</li>
+<li><strong>터미널: Windows PowerShell</strong> 기준으로 작성했습니다. <code>docker</code>·<code>kubectl</code> 명령은 macOS/Linux에서도 동일하게 동작하며, 셸이 다른 부분(파일 생성·반복문 등)은 <strong>PowerShell / bash 탭</strong>으로 함께 제공합니다.</li>
+<li>PowerShell 주의: <code>&amp;&amp;</code> 연결은 쓰지 않고 줄을 나눠 실행하며, HTTP 확인은 브라우저나 <code>curl.exe</code> 를 씁니다. (자세한 내용은 <a href="setup/rancher-desktop/">환경 준비</a> 4번 참고)</li>
 <li><code>kubectl</code> 은 Rancher Desktop이 함께 설치합니다. 별도 설치가 필요 없습니다.</li>
 </ul>
 </div>

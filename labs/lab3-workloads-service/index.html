@@ -15,10 +15,6 @@
         <link rel="canonical" href="https://skilleat-labs.github.io/k8s-study-15days/labs/lab3-workloads-service/">
       
       
-        <link rel="prev" href="../lab2-kubernetes-start/">
-      
-      
-        <link rel="next" href="../lab4-operations/">
       
       
         
@@ -284,12 +280,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../lab1-container-basics/" class="md-tabs__link">
           
   
@@ -552,31 +546,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -594,7 +583,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -620,237 +609,6 @@
     
   
     Lab 1 · 컨테이너 & 이미지 기초
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lab2-kubernetes-start/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 3 · 워크로드와 서비스 노출
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 3 · 워크로드와 서비스 노출
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#3-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-1. 무중단 롤링 업데이트
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3-1. 무중단 롤링 업데이트">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        롤백
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-2-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-2. Service: 고정 주소 + 로드밸런싱
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3-2. Service: 고정 주소 + 로드밸런싱">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#clusterip" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClusterIP (내부 통신)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loadbalancer-rancher-desktop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LoadBalancer (외부 노출 — Rancher Desktop 편의)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-3-pod-deployment-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-3. 통합 실습: Pod → Deployment → Service 한 파일로
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        도전과제 🔥
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        정리 &amp; 다음 단계
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lab4-operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 4 · 운영 기반과 자동화
   
 
     
@@ -1029,37 +787,38 @@
 <p>PPT 연계: <em>워크로드 안정화 · 서비스 노출</em></p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">준비</p>
-<p>Lab 2의 <code>web</code> Deployment(replicas 2~3)가 떠 있는 상태에서 시작합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy<span class="w"> </span>web<span class="w"> </span><span class="o">||</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>deploy.yaml
-</code></pre></div></p>
+<p class="admonition-title">준비 / 기준 환경</p>
+<p>Lab 2의 <code>web</code> Deployment가 떠 있는 상태에서 시작합니다. (Windows PowerShell 기준)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">deploy</span> <span class="n">web</span>
+</code></pre></div>
+없으면 Lab 2의 <code>deploy.yaml</code> 을 다시 <code>kubectl apply -f deploy.yaml</code> 하세요.</p>
 </div>
 <hr />
 <h2 id="3-1">3-1. 무중단 롤링 업데이트<a class="headerlink" href="#3-1" title="Permanent link">&para;</a></h2>
 <p>이미지 버전을 바꾸면 쿠버네티스가 Pod를 <strong>조금씩 교체</strong>합니다(항상 일부는 서비스 유지).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 현재 이미지 확인</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy<span class="w"> </span>web<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.template.spec.containers[0].image}{&quot;\n&quot;}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># 현재 이미지 확인</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">deploy</span> <span class="n">web</span> <span class="n">-o</span> <span class="n">jsonpath</span><span class="p">=</span><span class="s2">&quot;{.spec.template.spec.containers[0].image}&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 이미지 변경 → 롤링 업데이트 트리거</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>image<span class="w"> </span>deploy/web<span class="w"> </span><span class="nv">nginx</span><span class="o">=</span>nginx:1.27-alpine
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c"># 이미지 변경 → 롤링 업데이트 트리거</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">kubectl</span> <span class="nb">set </span><span class="n">image</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span> <span class="n">nginx</span><span class="p">=</span><span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27-alpine</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># 진행 상황 관찰</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/web
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>kubectl<span class="w"> </span>get<span class="w"> </span>rs<span class="w">        </span><span class="c1"># 새 ReplicaSet으로 점진 교체된 흔적</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c"># 진행 상황 관찰</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">kubectl</span> <span class="n">rollout</span> <span class="n">status</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">rs</span>        <span class="c"># 새 ReplicaSet으로 점진 교체된 흔적</span>
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">방금 본 것</p>
 <p>구 ReplicaSet은 줄고 새 ReplicaSet이 늘어납니다. 한 번에 갈아엎지 않으므로 <strong>사용자는 끊김을 느끼지 않습니다.</strong></p>
 </div>
 <h3 id="_1">롤백<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 일부러 잘못된 이미지로 배포 (실패 유도)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>image<span class="w"> </span>deploy/web<span class="w"> </span><span class="nv">nginx</span><span class="o">=</span>nginx:nope-not-exist
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/web<span class="w"> </span>--timeout<span class="o">=</span>30s<span class="w">    </span><span class="c1"># 멈춤/ImagePullBackOff</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># 일부러 잘못된 이미지로 배포 (실패 유도)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">kubectl</span> <span class="nb">set </span><span class="n">image</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span> <span class="n">nginx</span><span class="p">=</span><span class="n">nginx</span><span class="p">:</span><span class="n">nope</span><span class="o">-not</span><span class="n">-exist</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">kubectl</span> <span class="n">rollout</span> <span class="n">status</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span> <span class="p">-</span><span class="n">-timeout</span><span class="p">=</span><span class="n">30s</span>    <span class="c"># 멈춤/ImagePullBackOff</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 직전 정상 버전으로 한 줄 롤백</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deploy/web
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/web
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># 직전 정상 버전으로 한 줄 롤백</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">kubectl</span> <span class="n">rollout</span> <span class="n">undo</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">kubectl</span> <span class="n">rollout</span> <span class="n">status</span> <span class="n">deploy</span><span class="p">/</span><span class="n">web</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span>
 </code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">핵심</p>
@@ -1069,12 +828,11 @@
 <h2 id="3-2-service">3-2. Service: 고정 주소 + 로드밸런싱<a class="headerlink" href="#3-2-service" title="Permanent link">&para;</a></h2>
 <p>Pod IP는 재생성 때마다 바뀝니다. <strong>Service</strong> 는 변하지 않는 주소와 로드밸런싱을 제공합니다.</p>
 <h3 id="clusterip">ClusterIP (내부 통신)<a class="headerlink" href="#clusterip" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>expose<span class="w"> </span>deploy<span class="w"> </span>web<span class="w"> </span>--port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--target-port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--name<span class="w"> </span>web
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc,endpoints<span class="w"> </span>web
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">kubectl</span> <span class="n">expose</span> <span class="n">deploy</span> <span class="n">web</span> <span class="p">-</span><span class="n">-port</span><span class="p">=</span><span class="n">80</span> <span class="p">-</span><span class="n">-target-port</span><span class="p">=</span><span class="n">80</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">svc</span><span class="p">,</span><span class="n">endpoints</span> <span class="n">web</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 클러스터 내부에서 &#39;이름&#39;으로 접근 (임시 Pod)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>run<span class="w"> </span>tmp<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;wget -qO- http://web | head -5&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c"># 클러스터 내부에서 &#39;이름&#39;으로 접근 (임시 Pod, 종료 시 자동 삭제)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">kubectl</span> <span class="n">run</span> <span class="n">tmp</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="p">-</span><span class="n">-image</span><span class="p">=</span><span class="n">busybox</span> <span class="p">-</span><span class="n">-restart</span><span class="p">=</span><span class="n">Never</span> <span class="p">--</span> <span class="n">sh</span> <span class="n">-c</span> <span class="s2">&quot;wget -qO- http://web&quot;</span>
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">selector → Endpoints → Pod</p>
@@ -1083,71 +841,67 @@ Pod가 바뀌어도 Service 이름(<code>web</code>)은 그대로입니다.</p>
 </div>
 <h3 id="loadbalancer-rancher-desktop">LoadBalancer (외부 노출 — Rancher Desktop 편의)<a class="headerlink" href="#loadbalancer-rancher-desktop" title="Permanent link">&para;</a></h3>
 <p>Rancher Desktop은 내장 ServiceLB로 <code>type: LoadBalancer</code> 를 <strong>localhost</strong> 에 바로 노출합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>expose<span class="w"> </span>deploy<span class="w"> </span>web<span class="w"> </span>--port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--target-port<span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--type<span class="o">=</span>LoadBalancer<span class="w"> </span>--name<span class="w"> </span>web-lb
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>web-lb<span class="w">        </span><span class="c1"># EXTERNAL-IP 가 localhost/127.0.0.1 로 채워짐</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">kubectl</span> <span class="n">expose</span> <span class="n">deploy</span> <span class="n">web</span> <span class="p">-</span><span class="n">-port</span><span class="p">=</span><span class="n">8088</span> <span class="p">-</span><span class="n">-target-port</span><span class="p">=</span><span class="n">80</span> <span class="p">-</span><span class="n">-type</span><span class="p">=</span><span class="n">LoadBalancer</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web-lb</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">svc</span> <span class="n">web-lb</span>        <span class="c"># EXTERNAL-IP 가 localhost/127.0.0.1 로 채워짐</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 외부(내 PC)에서 접속</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>curl<span class="w"> </span>http://localhost:80
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># 포트 80이 막혀 있으면 다른 포트로:  --port=8088 로 expose 후 curl localhost:8088</span>
+<p>브라우저에서 <strong>http://localhost:8088</strong> 로 접속하거나, 터미널에서 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">8088</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">포트가 충돌하면</p>
-<p>호스트 80포트가 이미 쓰이면 <code>--port=8088</code> 처럼 다른 포트로 노출하세요.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>svc<span class="w"> </span>web-lb
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>expose<span class="w"> </span>deploy<span class="w"> </span>web<span class="w"> </span>--port<span class="o">=</span><span class="m">8088</span><span class="w"> </span>--target-port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--type<span class="o">=</span>LoadBalancer<span class="w"> </span>--name<span class="w"> </span>web-lb
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>curl<span class="w"> </span>http://localhost:8088
+<p>8088이 이미 쓰이면 다른 포트로 다시 노출하세요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">kubectl</span> <span class="n">delete</span> <span class="n">svc</span> <span class="n">web-lb</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">kubectl</span> <span class="n">expose</span> <span class="n">deploy</span> <span class="n">web</span> <span class="p">-</span><span class="n">-port</span><span class="p">=</span><span class="n">9090</span> <span class="p">-</span><span class="n">-target-port</span><span class="p">=</span><span class="n">80</span> <span class="p">-</span><span class="n">-type</span><span class="p">=</span><span class="n">LoadBalancer</span> <span class="p">-</span><span class="n">-name</span> <span class="n">web-lb</span>
 </code></pre></div></p>
 </div>
 <hr />
 <h2 id="3-3-pod-deployment-service">3-3. 통합 실습: Pod → Deployment → Service 한 파일로<a class="headerlink" href="#3-3-pod-deployment-service" title="Permanent link">&para;</a></h2>
-<p>운영처럼 하나의 매니페스트로 묶어 배포합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>web-stack.yaml<span class="w"> </span><span class="s">&lt;&lt;&#39;YAML&#39;</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="s">apiVersion: apps/v1</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="s">kind: Deployment</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s">metadata:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s">  name: shop-web</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s">spec:</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s">  replicas: 3</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s">  selector:</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s">    matchLabels: { app: shop-web }</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="s">  template:</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="s">    metadata:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="s">      labels: { app: shop-web }</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="s">    spec:</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="s">      containers:</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="s">        - name: web</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="s">          image: nginx:1.27</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="s">          ports:</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="s">            - containerPort: 80</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="s">          readinessProbe:</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="s">            httpGet: { path: /, port: 80 }</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="s">            initialDelaySeconds: 2</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="s">            periodSeconds: 5</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="s">---</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="s">apiVersion: v1</span>
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="s">kind: Service</span>
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="s">metadata:</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="s">  name: shop-web</span>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="s">spec:</span>
-<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="s">  type: LoadBalancer</span>
-<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="s">  selector: { app: shop-web }</span>
-<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="s">  ports:</span>
-<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="s">    - port: 8090</span>
-<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="s">      targetPort: 80</span>
-<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="s">YAML</span>
-<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>
-<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>web-stack.yaml
-<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy,svc,pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>shop-web
+<p>운영처럼 하나의 매니페스트로 묶어 배포합니다. 아래를 <strong><code>web-stack.yaml</code></strong> 로 저장합니다.</p>
+<div class="highlight"><span class="filename">web-stack.yaml</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shop-web</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> app</span><span class="p">:</span><span class="w"> </span><span class="nv">shop-web</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> app</span><span class="p">:</span><span class="w"> </span><span class="nv">shop-web</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.27</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">          </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> path</span><span class="p">:</span><span class="w"> </span><span class="nv">/</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="nv">80</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">            </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="nn">---</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shop-web</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> app</span><span class="p">:</span><span class="w"> </span><span class="nv">shop-web</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8090</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 외부 접속</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>curl<span class="w"> </span>http://localhost:8090
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 무중단 업데이트 + 자가 치유 동시 확인</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>image<span class="w"> </span>deploy/shop-web<span class="w"> </span><span class="nv">web</span><span class="o">=</span>nginx:1.27-alpine
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deploy/shop-web
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>shop-web<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1<span class="w">     </span><span class="c1"># 하나 죽여도</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>curl<span class="w"> </span>http://localhost:8090<span class="w">                        </span><span class="c1"># 서비스는 계속 응답</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="n">web-stack</span><span class="p">.</span><span class="n">yaml</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">deploy</span><span class="p">,</span><span class="n">svc</span><span class="p">,</span><span class="n">pods</span> <span class="n">-l</span> <span class="n">app</span><span class="p">=</span><span class="n">shop-web</span>
+</code></pre></div>
+<p>브라우저에서 <strong>http://localhost:8090</strong> 접속. 이어서 무중단 업데이트 + 자가 치유를 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># 무중단 업데이트</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">kubectl</span> <span class="nb">set </span><span class="n">image</span> <span class="n">deploy</span><span class="p">/</span><span class="n">shop-web</span> <span class="n">web</span><span class="p">=</span><span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">27-alpine</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">kubectl</span> <span class="n">rollout</span> <span class="n">status</span> <span class="n">deploy</span><span class="p">/</span><span class="n">shop-web</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c"># Pod 하나 골라 삭제해도 서비스는 계속 응답 (이름 확인 후 삭제)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="n">-l</span> <span class="n">app</span><span class="p">=</span><span class="n">shop-web</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">kubectl</span> <span class="n">delete</span> <span class="n">pod</span> <span class="n">shop-web-xxxxxxxxxx-yyyyy</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">8090</span>
 </code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">방금 완성한 것</p>
@@ -1158,13 +912,19 @@ Pod가 바뀌어도 Service 이름(<code>web</code>)은 그대로입니다.</p>
 <h2 id="_2">도전과제 🔥<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>도전 1 (★★☆) · 분배 확인</summary>
-<p><code>shop-web</code> 의 각 Pod에 서로 다른 응답을 넣고(예: 각 Pod의 hostname), 여러 번 호출했을 때
-여러 Pod로 분배되는지 확인하세요.</p>
-<details class="note">
-<summary>힌트</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">6</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/shop-web<span class="w"> </span>--<span class="w"> </span>hostname<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<p><code>shop-web</code> 의 여러 Pod로 요청이 분배되는지, hostname을 여러 번 찍어 확인하세요.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell (Windows)</label><label for="__tabbed_1_2">bash (macOS/Linux)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">1</span><span class="p">..</span><span class="n">6</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="n">kubectl</span> <span class="n">exec</span> <span class="n">deploy</span><span class="p">/</span><span class="n">shop-web</span> <span class="p">--</span> <span class="n">hostname</span> <span class="p">}</span>
 </code></pre></div>
-</details>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">6</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/shop-web<span class="w"> </span>--<span class="w"> </span>hostname<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 </details>
 <details class="question">
 <summary>도전 2 (★★☆) · ClusterIP vs LoadBalancer</summary>
@@ -1218,44 +978,6 @@ Pod가 바뀌어도 Service 이름(<code>web</code>)은 그대로입니다.</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
-        
-          
-          <a href="../lab2-kubernetes-start/" class="md-footer__link md-footer__link--prev" aria-label="이전: Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                이전
-              </span>
-              <div class="md-ellipsis">
-                Lab 2 · 쿠버네티스 첫걸음 (Pod·Deployment)
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../lab4-operations/" class="md-footer__link md-footer__link--next" aria-label="다음: Lab 4 · 운영 기반과 자동화">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                다음
-              </span>
-              <div class="md-ellipsis">
-                Lab 4 · 운영 기반과 자동화
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
