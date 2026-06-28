@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/labs/lab1-container-basics/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/labs/lab2-kubernetes-start/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/labs/lab3-workloads-service/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/labs/lab4-operations/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://skilleat-labs.github.io/k8s-study-15days/setup/rancher-desktop/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+</urlset>
