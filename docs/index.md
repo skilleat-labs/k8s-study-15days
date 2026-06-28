@@ -29,9 +29,10 @@ graph LR
 2. 각 Lab은 **순서대로** 진행하도록 설계되어 있습니다. (앞 실습 결과를 뒤에서 사용)
 3. 각 Lab 끝의 **도전과제**는 배운 내용을 응용합니다. 막히면 힌트를 펼쳐 보세요.
 
-!!! tip "표기 약속"
-    - 명령은 모두 **터미널(셸)** 에서 실행합니다. 코드 블록 우측 상단의 복사 버튼을 쓰세요.
-    - `nerdctl` 은 Rancher Desktop의 기본 컨테이너 CLI입니다. **dockerd 모드**를 쓴다면 `nerdctl` 을 `docker` 로 바꿔 읽으면 됩니다.
+!!! tip "표기 약속 (기준 환경)"
+    - **컨테이너 엔진: Docker(dockerd) 모드** → CLI는 `docker` 를 사용합니다. (containerd 모드라면 `docker` 를 `nerdctl` 로 바꿔 읽으세요)
+    - **터미널: Windows PowerShell** 기준으로 작성했습니다. `docker`·`kubectl` 명령은 macOS/Linux에서도 동일하게 동작하며, 셸이 다른 부분(파일 생성·반복문 등)은 **PowerShell / bash 탭**으로 함께 제공합니다.
+    - PowerShell 주의: `&&` 연결은 쓰지 않고 줄을 나눠 실행하며, HTTP 확인은 브라우저나 `curl.exe` 를 씁니다. (자세한 내용은 [환경 준비](setup/rancher-desktop.md) 4번 참고)
     - `kubectl` 은 Rancher Desktop이 함께 설치합니다. 별도 설치가 필요 없습니다.
 
 !!! note "왜 Rancher Desktop인가"

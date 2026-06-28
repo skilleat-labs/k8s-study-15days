@@ -8,15 +8,15 @@
 
     PPT 연계: *운영 기반 · 자동화 · 보안*
 
-!!! note "준비"
-    Lab 2~3을 마친 상태. `kubectl get nodes` 정상.
+!!! note "준비 / 기준 환경"
+    Lab 2~3을 마친 상태. Windows PowerShell 기준이며, YAML은 편집기로 저장해서 사용합니다.
     Rancher Desktop은 기본 StorageClass `local-path` 를 제공하므로 PVC 실습이 추가 설정 없이 됩니다.
 
 ---
 
 ## 4-1. Namespace로 구역 나누기
 
-```bash
+```powershell
 kubectl create namespace dev
 kubectl get ns
 
@@ -31,8 +31,9 @@ kubectl get pods
 
 ### 자원 총량 제한 (ResourceQuota)
 
-```bash
-cat > quota.yaml <<'YAML'
+아래를 **`quota.yaml`** 로 저장합니다.
+
+```yaml title="quota.yaml"
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -43,8 +44,9 @@ spec:
     requests.cpu: "2"
     requests.memory: 2Gi
     pods: "10"
-YAML
+```
 
+```powershell
 kubectl apply -f quota.yaml
 kubectl describe quota dev-quota -n dev
 ```
@@ -58,12 +60,13 @@ kubectl describe quota dev-quota -n dev
 
 같은 이미지를 **환경별로 다르게** 동작시킵니다. (12-factor)
 
-```bash
-kubectl create configmap app-config \
-  --from-literal=APP_MODE=production \
-  --from-literal=PAGE_SIZE=20 -n dev
+```powershell
+kubectl create configmap app-config --from-literal=APP_MODE=production --from-literal=PAGE_SIZE=20 -n dev
+```
 
-cat > cm-pod.yaml <<'YAML'
+아래를 **`cm-pod.yaml`** 로 저장합니다.
+
+```yaml title="cm-pod.yaml"
 apiVersion: v1
 kind: Pod
 metadata:
@@ -77,8 +80,9 @@ spec:
       envFrom:
         - configMapRef:
             name: app-config
-YAML
+```
 
+```powershell
 kubectl apply -f cm-pod.yaml
 kubectl logs cm-demo -n dev      # MODE=production SIZE=20
 ```
@@ -91,14 +95,28 @@ kubectl logs cm-demo -n dev      # MODE=production SIZE=20
 
 ## 4-3. Secret: 비밀 분리
 
-```bash
-kubectl create secret generic db-secret \
-  --from-literal=DB_PASS='S3cr3t!' -n dev
+```powershell
+kubectl create secret generic db-secret --from-literal=DB_PASS='S3cr3t!' -n dev
+```
 
-# 값은 base64로 저장됨 (인코딩이지 암호화가 아님 → RBAC로 보호)
-kubectl get secret db-secret -n dev -o jsonpath='{.data.DB_PASS}' | base64 -d; echo
+저장된 값은 base64로 인코딩되어 있습니다(암호화가 아님). 디코드해서 확인해 봅니다.
 
-cat > secret-pod.yaml <<'YAML'
+=== "PowerShell (Windows)"
+
+    ```powershell
+    $b64 = kubectl get secret db-secret -n dev -o jsonpath="{.data.DB_PASS}"
+    [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64))
+    ```
+
+=== "bash (macOS/Linux)"
+
+    ```bash
+    kubectl get secret db-secret -n dev -o jsonpath='{.data.DB_PASS}' | base64 -d; echo
+    ```
+
+아래를 **`secret-pod.yaml`** 로 저장합니다.
+
+```yaml title="secret-pod.yaml"
 apiVersion: v1
 kind: Pod
 metadata:
@@ -115,8 +133,9 @@ spec:
             secretKeyRef:
               name: db-secret
               key: DB_PASS
-YAML
+```
 
+```powershell
 kubectl apply -f secret-pod.yaml
 kubectl logs secret-demo -n dev
 ```
@@ -131,10 +150,13 @@ kubectl logs secret-demo -n dev
 컨테이너 저장은 휘발성입니다. **PVC** 로 Pod 수명과 분리된 저장소를 붙입니다.
 Rancher Desktop은 기본 StorageClass `local-path` 로 PV를 자동 생성합니다.
 
-```bash
+```powershell
 kubectl get storageclass         # local-path (default) 확인
+```
 
-cat > pvc.yaml <<'YAML'
+아래를 **`pvc.yaml`** 로 저장합니다.
+
+```yaml title="pvc.yaml"
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -163,18 +185,19 @@ spec:
     - name: d
       persistentVolumeClaim:
         claimName: data-pvc
-YAML
+```
 
+```powershell
 kubectl apply -f pvc.yaml
 kubectl get pvc,pv -n dev        # STATUS: Bound
 
-# 데이터 기록
+# 데이터 기록 (sh -c 안은 컨테이너 셸)
 kubectl exec writer -n dev -- sh -c "echo hello-persist > /data/note.txt"
 ```
 
 ### Pod를 죽여도 데이터가 남는지 확인
 
-```bash
+```powershell
 kubectl delete pod writer -n dev
 kubectl apply -f pvc.yaml         # 같은 PVC를 다시 마운트하는 Pod 재생성
 kubectl exec writer -n dev -- cat /data/note.txt   # hello-persist 그대로!
@@ -189,10 +212,13 @@ kubectl exec writer -n dev -- cat /data/note.txt   # hello-persist 그대로!
 
 "누가 무엇을 할 수 있는가"를 설계합니다.
 
-```bash
+```powershell
 kubectl create serviceaccount app-sa -n dev
+```
 
-cat > rbac.yaml <<'YAML'
+아래를 **`rbac.yaml`** 로 저장합니다.
+
+```yaml title="rbac.yaml"
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -216,8 +242,9 @@ roleRef:
   kind: Role
   name: pod-reader
   apiGroup: rbac.authorization.k8s.io
-YAML
+```
 
+```powershell
 kubectl apply -f rbac.yaml
 
 # 권한 시뮬레이션 (can-i)
@@ -233,7 +260,7 @@ kubectl auth can-i delete pods -n dev --as=system:serviceaccount:dev:app-sa   # 
 
 ## 정리(실습 청소)
 
-```bash
+```powershell
 # 기본 네임스페이스 원복
 kubectl config set-context --current --namespace=default
 

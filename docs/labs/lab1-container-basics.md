@@ -8,9 +8,9 @@
 
     PPT 연계: *컨테이너 개념 · 이미지 · Docker 한계*
 
-!!! note "준비"
-    [Rancher Desktop 설치·설정](../setup/rancher-desktop.md)을 마쳤고, `nerdctl version` 이 정상 출력되어야 합니다.
-    (dockerd 모드라면 `nerdctl` 을 `docker` 로 바꿔 실행)
+!!! note "준비 / 기준 환경"
+    [Rancher Desktop 설치·설정](../setup/rancher-desktop.md)을 마쳤고, **Docker(dockerd) 모드**에서 `docker version` 이 정상 출력되어야 합니다.
+    명령은 **Windows PowerShell** 기준입니다. (`&&` 미사용, 파일은 편집기로 저장)
 
 ---
 
@@ -18,26 +18,30 @@
 
 이미지(설계도)를 받아 컨테이너(실행체)로 띄웁니다.
 
-```bash
+```powershell
 # 1) 공식 nginx 이미지 받기
-nerdctl pull nginx:1.27
+docker pull nginx:1.27
 
 # 2) 컨테이너로 실행 (백그라운드 -d, 호스트 8080 → 컨테이너 80)
-nerdctl run -d --name web -p 8080:80 nginx:1.27
+docker run -d --name web -p 8080:80 nginx:1.27
 
 # 3) 동작 확인
-nerdctl ps
-curl http://localhost:8080
+docker ps
 ```
 
-브라우저에서 `http://localhost:8080` 을 열어 nginx 기본 페이지가 보이면 성공입니다.
+브라우저에서 **http://localhost:8080** 을 열어 nginx 기본 페이지가 보이면 성공입니다.
 
-!!! question "확인"
-    `nerdctl images` 로 받은 이미지를, `nerdctl ps` 로 실행 중인 컨테이너를 봅니다.
-    **하나의 이미지로 여러 컨테이너**를 띄울 수 있습니다.
-    ```bash
-    nerdctl run -d --name web2 -p 8081:80 nginx:1.27
-    nerdctl ps   # web, web2 두 개가 같은 이미지로 동작
+!!! tip "터미널로 HTTP 확인"
+    PowerShell에서 `curl` 은 `Invoke-WebRequest` 별칭이라 동작이 다릅니다. 진짜 curl은 `curl.exe` 로 부르세요.
+    ```powershell
+    curl.exe http://localhost:8080
+    ```
+
+!!! question "확인 · 하나의 이미지 → 여러 컨테이너"
+    같은 이미지로 컨테이너를 하나 더 띄워봅니다.
+    ```powershell
+    docker run -d --name web2 -p 8081:80 nginx:1.27
+    docker ps
     ```
 
 ---
@@ -46,15 +50,18 @@ curl http://localhost:8080
 
 컨테이너 안에서 보이는 세상이 호스트와 다른 것을 확인합니다. (Namespace 격리)
 
-```bash
-# 컨테이너 안으로 들어가기
-nerdctl exec -it web sh
+```powershell
+# 컨테이너 안으로 들어가기 (셸 진입)
+docker exec -it web sh
+```
 
-# (컨테이너 안에서) 자기 자신이 PID 1 임을 확인
-ps -ef
-hostname
-ip addr        # 자기만의 IP (없으면 'apk add iproute2' 후 재시도)
-exit
+컨테이너 안(리눅스 셸)에서 아래를 실행합니다.
+
+```sh
+ps -ef        # 자기 자신이 PID 1 임을 확인
+hostname      # 자기만의 호스트명
+ip addr       # 자기만의 IP (명령이 없으면 'apk add iproute2' 후 재시도)
+exit          # 컨테이너에서 빠져나오기
 ```
 
 !!! info "방금 본 것"
@@ -65,16 +72,16 @@ exit
 
 컨테이너는 메인 프로세스가 살아있는 동안만 살아 있습니다.
 
-```bash
+```powershell
 # 할 일(echo)만 하고 즉시 끝나는 컨테이너
-nerdctl run --name once ubuntu echo "Hello Container"
+docker run --name once ubuntu echo "Hello Container"
 
-# 상태 확인 → Exited (메인 프로세스가 끝났으니 컨테이너도 종료)
-nerdctl ps -a | grep once
+# 전체 컨테이너 목록에서 once 의 STATUS 확인 → Exited
+docker ps -a
 ```
 
 !!! success "결론"
-    `docker run ubuntu echo "..."` 는 출력 후 **즉시 종료**됩니다.
+    `docker run ubuntu echo "..."` 는 출력 후 **즉시 종료(Exited)** 됩니다.
     컨테이너는 "계속 켜진 서버"가 아니라 **PID 1이 살아있는 동안만 사는 프로세스**입니다.
 
 ---
@@ -83,40 +90,64 @@ nerdctl ps -a | grep once
 
 `Dockerfile`(설계도) → 이미지 → 컨테이너 흐름을 직접 만듭니다.
 
-```bash
-# 작업 폴더 생성
-mkdir -p ~/lab1-app && cd ~/lab1-app
+먼저 작업 폴더로 이동합니다.
 
-# 간단한 앱
-cat > app.py <<'PY'
+```powershell
+mkdir lab1-app
+cd lab1-app
+```
+
+아래 두 파일을 편집기로 저장합니다. (같은 `lab1-app` 폴더 안)
+
+```python title="app.py"
 print("hello from my image")
-PY
+```
 
-# Dockerfile 작성
-cat > Dockerfile <<'DOCKER'
+```dockerfile title="Dockerfile"
 FROM python:3.12-slim
 WORKDIR /app
 COPY app.py .
 CMD ["python", "app.py"]
-DOCKER
 ```
 
-이미지를 빌드합니다. **쿠버네티스에서도 쓰려면** containerd의 `k8s.io` 네임스페이스로 빌드합니다(Lab 2에서 사용).
+??? tip "터미널에서 바로 파일 만들기 (선택)"
+    === "PowerShell (Windows)"
+        ```powershell
+        'print("hello from my image")' | Set-Content -Encoding utf8 app.py
+        @'
+        FROM python:3.12-slim
+        WORKDIR /app
+        COPY app.py .
+        CMD ["python", "app.py"]
+        '@ | Set-Content -Encoding utf8 Dockerfile
+        ```
+    === "bash (macOS/Linux)"
+        ```bash
+        echo 'print("hello from my image")' > app.py
+        cat > Dockerfile <<'EOF'
+        FROM python:3.12-slim
+        WORKDIR /app
+        COPY app.py .
+        CMD ["python", "app.py"]
+        EOF
+        ```
 
-```bash
-# containerd 모드: k8s가 보는 네임스페이스로 빌드
-nerdctl --namespace k8s.io build -t myapp:1.0 .
+이미지를 빌드하고 실행합니다. (dockerd 모드라 별도 네임스페이스 불필요)
+
+```powershell
+# 이미지 빌드
+docker build -t myapp:1.0 .
 
 # 실행해 보기
-nerdctl --namespace k8s.io run --rm myapp:1.0
+docker run --rm myapp:1.0
 ```
 
 기대 결과: `hello from my image` 출력.
 
 !!! tip "레이어 캐시 관찰"
     `app.py` 만 바꾸고 다시 빌드하면, 위쪽 `FROM`/패키지 레이어는 **CACHED** 로 재사용됩니다.
-    ```bash
-    nerdctl --namespace k8s.io build -t myapp:1.1 .   # 일부 레이어 CACHED
+    ```powershell
+    docker build -t myapp:1.1 .
     ```
     자주 바뀌는 `COPY` 는 Dockerfile 뒤쪽에 두면 캐시 적중률이 올라갑니다.
 
@@ -128,17 +159,19 @@ nerdctl --namespace k8s.io run --rm myapp:1.0
 
 ### 자동 복구가 없다
 
-```bash
+```powershell
 # web 컨테이너를 강제 종료
-nerdctl kill web
-nerdctl ps          # web 이 사라짐 — 아무도 다시 살려주지 않는다
+docker kill web
+
+# 목록 확인 — web 이 사라짐. 아무도 다시 살려주지 않는다
+docker ps
 ```
 
 ### 수동 확장 / 포트 충돌
 
-```bash
-# 같은 80포트로 또 띄우려 하면 포트 충돌
-nerdctl run -d --name web3 -p 8080:80 nginx:1.27   # 8080 이미 사용 중 → 실패
+```powershell
+# 같은 8080 포트로 또 띄우려 하면 포트 충돌로 실패
+docker run -d --name web3 -p 8080:80 nginx:1.27
 ```
 
 복제본을 늘리려면 포트를 일일이 다르게 잡고, 그 앞에 로드밸런서도 직접 세워야 합니다.
@@ -154,17 +187,25 @@ nerdctl run -d --name web3 -p 8080:80 nginx:1.27   # 8080 이미 사용 중 → 
 
 ---
 
+## 정리(실습 청소)
+
+```powershell
+docker rm -f web web2 web3 once
+```
+
+---
+
 ## 도전과제 🔥
 
 ??? question "도전 1 (★☆☆) · 한 이미지, 두 컨테이너"
     `nginx:1.27` 하나로 컨테이너 3개를 서로 다른 포트(8080/8081/8082)로 띄우고
-    `nerdctl ps` 로 확인하세요. "하나의 이미지 → 여러 컨테이너"를 체감합니다.
+    `docker ps` 로 확인하세요. "하나의 이미지 → 여러 컨테이너"를 체감합니다.
 
     ??? note "힌트"
-        ```bash
-        nerdctl run -d --name w1 -p 8080:80 nginx:1.27
-        nerdctl run -d --name w2 -p 8081:80 nginx:1.27
-        nerdctl run -d --name w3 -p 8082:80 nginx:1.27
+        ```powershell
+        docker run -d --name w1 -p 8080:80 nginx:1.27
+        docker run -d --name w2 -p 8081:80 nginx:1.27
+        docker run -d --name w3 -p 8082:80 nginx:1.27
         ```
 
 ??? question "도전 2 (★★☆) · 캐시 최적화 Dockerfile"
@@ -172,7 +213,7 @@ nerdctl run -d --name web3 -p 8080:80 nginx:1.27   # 8080 이미 사용 중 → 
     Dockerfile을 재구성하고, 두 번째 빌드에서 의존성 레이어가 **CACHED** 되는지 확인하세요.
 
     ??? note "힌트"
-        ```dockerfile
+        ```dockerfile title="Dockerfile"
         FROM python:3.12-slim
         WORKDIR /app
         COPY requirements.txt .
